@@ -17,11 +17,10 @@ Hickory: Loign Page Cutomization
     * "Reset password" button 3rd
     * deleted the "Log in with Odoo" button
         """,
-    'depends': ['auth_signup', 'auth_oauth', 'web', 'web_studio', 'sale'],
+    'depends': ['auth_signup', 'auth_oauth', 'web', 'web_studio'],
     'data': [
         "data/data.xml",
         "views/templates.xml",
-        "sale_view.xml",
     ],
     'demo': [
     ],
