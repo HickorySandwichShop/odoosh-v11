@@ -2,12 +2,11 @@
 <odoo>
 
 
-    <template id="assets_frontend" inherit_id="website.assets_frontend" name="select_assets">
-        <xpath expr="." position="inside">
-            <link rel="stylesheet" href="/hickory_product_promotions/static/src/css/select.css" />
-        </xpath>
-    </template>
-
+        <template id="products_pager" inherit_id="website_sale.products" name="Product search bar">
+            <xpath expr="//div[@class='products_pager']" position="attributes">
+                <attribute name="style">display:none;</attribute>
+            </xpath>
+        </template>
 
 
         <template id="products_attributes" inherit_id="website_sale.products_attributes" name="Product Attribute's Filters">
@@ -22,7 +21,7 @@
                             </div>
                             <t t-if="a.type == 'select' and a.is_show_website">
                                 <select class="form-control" name="attrib">
-                                    <option value="" class="disabled_select"><span t-esc="a.name"></span></option>
+                                    <option value="" class="disabled_select" style="display:none;"><span t-esc="a.name"></span></option>
                                     <option value=""/>
                                     <t t-foreach="a.value_ids" t-as="v">
                                         <option t-att-value="'%s-%s' % (a.id,v.id)" t-esc="v.name" t-att-selected="v.id in attrib_set" />
