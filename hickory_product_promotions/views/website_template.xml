@@ -9,6 +9,14 @@
         </template>
 
 
+        <template id="assets_frontend" inherit_id="website.assets_frontend" name="select_assets">
+            <xpath expr="." position="inside">
+                 <link rel="stylesheet" href="/hickory_product_promotions/static/src/css/select.css" />
+            </xpath>
+        </template>
+
+
+
         <template id="products_attributes" inherit_id="website_sale.products_attributes" name="Product Attribute's Filters">
         <xpath expr="//form[hasclass('js_attributes')]" position="replace">
             <form class="js_attributes" method="get">
