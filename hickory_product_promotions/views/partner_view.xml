@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//notebook" position="inside">
-                    <page string="Variants" name="variants">
+                    <page string="Variants" name="variants" attrs="{'invisible':[('customer', '=', False)]}">
                         <field name="variants_line_ids">
                             <tree string="Applicable Variants" editable="bottom">
                                 <field name="attribute"/>
