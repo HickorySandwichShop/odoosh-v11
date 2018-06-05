@@ -6,3 +6,4 @@ class ProductAttribute(models.Model):
     _inherit = 'product.attribute'
 
     is_show_website = fields.Boolean(string="Show in website", default=True)
+    is_site = fields.Boolean(string="Is Site Attribute", default=False)

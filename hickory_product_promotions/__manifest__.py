@@ -21,6 +21,8 @@ Allows to promote products based on customer interests.
               'security/ir.model.access.csv',
               'data/promo_weekly_cron.xml',
               'data/mail_template.xml',
+              'report/report_barcode_template.xml',
+              'report/report_template.xml',
              ],
     'demo_xml': [],
     'installable': True,

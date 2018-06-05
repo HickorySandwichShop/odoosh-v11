@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="report_product_label_sale_line"
+            string="Products Line Labels"
+            model="sale.order"
+            report_type="qweb-pdf"
+            name="hickory_product_promotions.report_product_label_sale_order_line"
+            file="hickory_product_promotions.report_product_label_sale_order_line"
+            print_report_name="'Products Labels - %s' % (object.name)"
+        />
+
+    </data>
+</odoo>
