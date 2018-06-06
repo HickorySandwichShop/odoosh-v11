@@ -61,7 +61,7 @@ class ProductVariantCreator(models.TransientModel):
         """
         self.ensure_one()
 
-        self.template_id.create_partial_variant_ids([matrix_line.value_ids for matrix_line in self.matrix_line_ids if matrix_line.value_ids])
+        self.template_id.create_partial_variant_ids([matrix_line.value_ids for matrix_line in self.matrix_line_ids if matrix_line.value_ids], drop=False)
         return {'type': 'ir.actions.act_window',
                 'view_mode': 'form',
                 'view_type': 'form',
