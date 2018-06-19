@@ -55,7 +55,7 @@ class ProductTemplate(models.Model):
         :return: None
         """
         for template in self:
-            if not template.attribute_line_ids or template.type == 'product':
+            if not template.attribute_line_ids:
                 super(ProductTemplate, template).create_variant_ids()
 
     @api.multi
