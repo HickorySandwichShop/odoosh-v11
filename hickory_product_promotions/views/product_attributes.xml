@@ -10,6 +10,7 @@
                 <xpath expr="//tree" position="inside">
                     <field name="is_show_website"/>
                     <field name="is_site"/>
+                    <field name="header_type"/>
                 </xpath>
 
 
