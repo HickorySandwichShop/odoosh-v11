@@ -27,7 +27,7 @@
                                 <tr style="border-top:hidden;border-bottom:hidden;height:40%;">
                                     <td style="text-align:center; vertical-align:middle;" class="col-xs-5">
                                         <img t-if="line.product_id.barcode"
-                                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', line.product_id.barcode, 600, 150)"
+                                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', line.product_id.barcode, 600, 150)"
                                              style="width:100%;height:20%;"/>
                                         <span t-field="line.product_id.barcode"/>
                                     </td>
