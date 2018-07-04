@@ -78,8 +78,11 @@ class ProductVariantCreator(models.TransientModel):
         :return: self
         """
         matrix_line_pool = self.env['product.variant.matrix.line']
-
         for attribute_line in self.template_id.attribute_line_ids:
+            value_ids = [(4, val) for val in attribute_line.value_ids.ids]
             matrix_line_pool.create({'attribute_id': attribute_line.attribute_id.id,
-                                     'creator_id': self.id})
+                                     'creator_id': self.id,
+                                     'use': 'all_values',
+                                     'value_ids': value_ids,
+                                    })
         return self

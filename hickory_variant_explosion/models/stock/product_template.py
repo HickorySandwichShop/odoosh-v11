@@ -125,7 +125,7 @@ class ProductTemplate(models.Model):
         :return: dict A redirect action to open a new wizard form
         """
         self.ensure_one()
-        creator_vals = {'template_id': self.id, 'method': 'all'}
+        creator_vals = {'template_id': self.id, 'method': 'selective'}
         creator = self.env['product.variant.creator'].create(creator_vals)
         creator.populate_matrix()
 
