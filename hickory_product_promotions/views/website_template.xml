@@ -22,6 +22,21 @@
     </template>
 
 
+    <!-- ASSETS FRONTEND WEBSITE SALE -->
+    <template id="assets_frontend" inherit_id="website_sale.assets_frontend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/hickory_product_promotions/static/src/js/website_filter.js"></script>
+        </xpath>
+    </template>
+
+
+    <template id="variants_inherit_website_sale_extension" inherit_id="website_sale.variants">
+        <xpath expr="//select[1]//option[1]" position="attributes">
+            <attribute name="t-att-selected">value_id.id in attrib_set</attribute>
+        </xpath>
+    </template>
+
+
     <template id="products_attributes" inherit_id="website_sale.products_attributes" name="Product Attribute's Filters">
         <xpath expr="//form[hasclass('js_attributes')]" position="replace">
             <form class="js_attributes" method="get">

@@ -136,6 +136,14 @@ class WebsiteSale(WebsiteSale):
         pager = request.website.pager(url=url, total=product_count, page=page, step=ppg, scope=7, url_args=post)
         products = Product.search(domain, limit=ppg, offset=pager['offset'], order=self._get_search_order(post))
 
+        if attrib_values:
+            variants = request.env['product.product'].search(self._get_product_domain(attrib_values))
+            product_tmpls = variants.mapped('product_tmpl_id')
+            products = products.filtered(lambda rec: rec.id in product_tmpls.ids)
+            all_products = request.env['product.template'].search(self._get_search_domain(search, category, attrib_values))
+            product_count = len(all_products.filtered(lambda rec: rec.id in product_tmpls.ids))
+
+
         ProductAttribute = request.env['product.attribute']
         if products:
             # get all products without limit
@@ -182,3 +190,28 @@ class WebsiteSale(WebsiteSale):
         if category:
             values['main_object'] = category
         return request.render("website_sale.products", values)
+
+
+
+
+    def _get_product_domain(self, attrib_values):
+        domain = request.website.sale_product_domain()
+
+        if attrib_values:
+            attrib = None
+            ids = []
+            for value in attrib_values:
+                if not attrib:
+                    attrib = value[0]
+                    ids.append(value[1])
+                elif value[0] == attrib:
+                    ids.append(value[1])
+                else:
+                    domain += [('attribute_value_ids.id', 'in', ids)]
+                    attrib = value[0]
+                    ids = [value[1]]
+            if attrib:
+                domain += [('attribute_value_ids.id', 'in', ids)]
+
+        return domain
+
