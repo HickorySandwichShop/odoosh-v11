@@ -13,7 +13,7 @@ Allows to promote products based on customer interests.
 
     """,
     'website': 'http://www.confianzit.com',
-    "depends": ['website_sale'],
+    "depends": ['website_sale', 'mrp', 'product'],
     'data': [
               'views/website_template.xml',
               'views/partner_view.xml',
