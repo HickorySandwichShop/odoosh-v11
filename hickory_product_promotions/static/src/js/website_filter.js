@@ -1,4 +1,4 @@
-odoo.define('website_sale_extensions.website_sale', function (require) {
+odoo.define('hickory_product_promotions.website_sale', function (require) {
     "use strict";
 
     require('web.dom_ready');
