@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 {
     "name": "Hickory Sandwich Website Sale Extension",
     "description": """
