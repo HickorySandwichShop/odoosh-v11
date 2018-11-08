@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': 'BOM Extension',
+    'name': 'Update Product BOM & Template',
     'version': '1.0',
-    'category': 'Manufacturing',
-    'summary': "Manufacturing",
+    'category': 'Product',
+    'summary': "Update Product BOM & Template",
     'description': """
        """,
     'author': 'Confianz Global',
