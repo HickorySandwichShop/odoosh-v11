@@ -17,6 +17,7 @@ Allows to promote products based on customer interests.
     'data': [
               'views/website_template.xml',
               'views/partner_view.xml',
+              'views/product_template.xml',
               'views/product_attributes.xml',
               'security/ir.model.access.csv',
               'data/promo_weekly_cron.xml',

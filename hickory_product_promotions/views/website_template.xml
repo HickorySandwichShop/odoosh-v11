@@ -34,6 +34,10 @@
         <xpath expr="//select[1]//option[1]" position="attributes">
             <attribute name="t-att-selected">value_id.id in attrib_set</attribute>
         </xpath>
+
+        <xpath expr="//ul[@t-att-data-attribute_value_ids='attribute_value_ids']/t[1]" position="attributes">
+            <attribute name="t-foreach">product.attribute_line_ids.sorted(key=lambda x: x.sequence)</attribute>
+        </xpath>
     </template>
 
 
