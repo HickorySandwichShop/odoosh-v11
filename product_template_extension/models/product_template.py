@@ -48,9 +48,13 @@ class ProductTemplate(models.Model):
     @api.multi
     def create_variant_ids(self):
 
-        existing_attr_combinations = [variant.attribute_value_ids for variant in self.product_variant_ids]
-        res = super(ProductTemplate, self).create_variant_ids()
 
+        existing_attr_combinations = [variant.attribute_value_ids for variant in self.product_variant_ids]
+
+        current_attrs_set = self.product_variant_ids.mapped('attribute_value_ids')
+        updated_attrs_set = self.attribute_line_ids.mapped('value_ids')
+        new_attrs_set = updated_attrs_set - current_attrs_set
+        res = super(ProductTemplate, self).create_variant_ids()
         #unlink all unnecessary variants from parent template(unlink unnecessary variants from above created all variants)
         if existing_attr_combinations:
             variants_to_unlink = self.env['product.product']
@@ -58,6 +62,9 @@ class ProductTemplate(models.Model):
                 flag = False
                 for comb in existing_attr_combinations:
                     if all([c.id in product.attribute_value_ids.ids for c in comb]):
+                        flag = True
+                        break
+                    elif any(c.id in product.attribute_value_ids.ids for c in new_attrs_set):
                         flag = True
                         break
                 if not flag:
