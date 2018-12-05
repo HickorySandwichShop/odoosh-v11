@@ -39,36 +39,22 @@ class ProductTemplate(models.Model):
             except (psycopg2.Error, except_orm):
                 variant.write({'active': False})
                 pass
-
         return new_template
 
 
 
-
     @api.multi
-    def create_variant_ids(self):
-
-
-        existing_attr_combinations = [variant.attribute_value_ids for variant in self.product_variant_ids]
-
-        current_attrs_set = self.product_variant_ids.mapped('attribute_value_ids')
-        updated_attrs_set = self.attribute_line_ids.mapped('value_ids')
-        new_attrs_set = updated_attrs_set - current_attrs_set
-        res = super(ProductTemplate, self).create_variant_ids()
-        #unlink all unnecessary variants from parent template(unlink unnecessary variants from above created all variants)
-        if existing_attr_combinations:
+    def write(self, vals):
+        uncreated_attr_combinations = self.get_uncreated_attributes_list()
+        current_variant_count = len(self.product_variant_ids)
+        res = super(ProductTemplate, self).write(vals)
+        if vals.get('attribute_line_ids', False) and uncreated_attr_combinations and current_variant_count:
             variants_to_unlink = self.env['product.product']
             for product in self.product_variant_ids:
-                flag = False
-                for comb in existing_attr_combinations:
+                for comb in uncreated_attr_combinations:
                     if all([c.id in product.attribute_value_ids.ids for c in comb]):
-                        flag = True
+                        variants_to_unlink |= product
                         break
-                    elif any(c.id in product.attribute_value_ids.ids for c in new_attrs_set):
-                        flag = True
-                        break
-                if not flag:
-                    variants_to_unlink |= product
             # unlink or inactive product
             for variant in variants_to_unlink:
                 try:
@@ -79,6 +65,39 @@ class ProductTemplate(models.Model):
                     variant.write({'active': False})
                     pass
         return res
+
+
+    @api.multi
+    def get_uncreated_attributes_list(self):
+        self.ensure_one()
+        self._cr.execute("select id from product_attribute_line where product_tmpl_id = %s" %(self.id))
+        attribute_line_ids = self._cr.fetchall()
+        attribute_line_ids = attribute_line_ids and [ele[0] for ele in attribute_line_ids] or []
+        attribute_line_ids = self.env['product.attribute.line'].browse(attribute_line_ids)
+        AttributeValues = self.env['product.attribute.value']
+        all_attr_combinations = [
+            AttributeValues.browse(value_ids)
+            for value_ids in itertools.product(*(line.value_ids.ids for line in attribute_line_ids if line.value_ids[:1].attribute_id.create_variant))
+        ]
+
+        existing_attr_combinations = {frozenset(variant.attribute_value_ids.ids) for variant in self.product_variant_ids}
+        uncreated_attr_combinations = [
+            value_ids
+            for value_ids in all_attr_combinations
+            if set(value_ids.ids) not in existing_attr_combinations
+        ]
+        return uncreated_attr_combinations
+
+
+
+
+
+
+
+
+
+
+
 
 
 
