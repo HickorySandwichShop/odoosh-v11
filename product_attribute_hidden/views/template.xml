@@ -69,7 +69,7 @@
         </t>
       </ul>
     </template>
-    <template id="website_sale.products_attributes" inherit_id="website_sale.products">
+    <template id="website_sale.products_attributes" inherit_id="website_sale.products" active="False" customize_show="True" name="Product Attribute's Filters">
         <xpath expr="//div[@id='products_grid_before']" position="inside">
             <form class="js_attributes" method="get">
                 <input type="hidden" name="search" t-att-value="search" />

@@ -1,20 +1,26 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 {
-    'name': 'Product Attribute Hidden',
+    'name': 'eCommerce Product Attribute Hidden',
     'summary': 'Product Attribute Hidden',
+    'sequence': 1001,
+    'license': 'OEEL-1',
+    'website': 'https://www.odoo.com',
+    'version': '1.0',
+    'author': 'Odoo Inc',
     'description': """
-Product Attribute Hidden V9 Features
-====================================
+eCommerce Product Attribute Hidden V9 Features
+==============================================
 * Product Attribute type Hidden V9 Features
     """,
-    'website': 'https://www.odoo.com/page/website',
-    'depends': ['website_sale'],
-    'category': 'Custom Dev',
+    'category': 'Custom Development',
+    'depends': ['sale', 'website_sale'],
     'data': [
         'views/template.xml',
     ],
+    'demo': [],
+    'qweb': [],
     'installable': True,
-    'auto_install': True,
+    'application': False,
+    'auto_install': False,
 }
