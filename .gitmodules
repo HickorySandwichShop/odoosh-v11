@@ -1,0 +1,4 @@
+[submodule "josemcoronado/base_hss"]
+	path = josemcoronado/base_hss
+	url = git@github.com:josemcoronado/base_hss.git
+	branch = master
