@@ -2,17 +2,15 @@
 <odoo>
     <data>
         <template id="auth_signup_login" inherit_id="auth_signup.login" name="Sign up - Reset Password" priority="99">
-            <xpath expr="//div[hasclass('justify-content-between')]" position="replace">
+            <xpath expr="//div[hasclass('justify-content-between')]" position="replace"/>
+            <xpath expr="//div[hasclass('o_login_auth')]" position="after">
                 <div class="mt-2">
-                    <div class="clearfix"/>
                     <div class="float-left">
                         <a t-if="signup_enabled" t-attf-href="/web/signup?{{ keep_query() }}" class="btn-link btn">Create an account without Google</a>
                     </div>
-                    <div class="clearfix"/>
                     <div class="float-left">
                         <a t-if="reset_password_enabled" t-attf-href="/web/reset_password?{{ keep_query() }}" class="btn-link btn">Reset Password</a>
                     </div>
-                    <div class="clearfix"/>
                 </div>
             </xpath>
         </template>
@@ -24,6 +22,8 @@
                 <attribute name="class" add="o_hidden" separator=" "/>
             </xpath>
         </template>
+        <template id="auth_oauth_providers" inherit_id="auth_oauth.providers" name="OAuth Providers em">
+            <xpath expr="//em" position="replace" />
+        </template>
     </data>
 </odoo>
-        
